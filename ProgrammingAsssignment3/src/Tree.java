@@ -16,7 +16,7 @@ public class Tree
             Node parent;
             while (true) {
                 parent = current;
-                if (k.getWhere() < current.getWhere()) {
+                if (k.getData().compareTo(current.getData()) < 0) {
                     current = current.getleftChild();
                     if (current == null) {
                         parent.setleftChild(k);
@@ -40,12 +40,11 @@ public class Tree
 
     public Node search(String searchElem) { // searches for a node in the tree
         Node c = root;
-        while (c.getData() != null) {
-            if (c.getData().compareTo(searchElem) > 0)
+        while (c.getData() != searchElem) {
+            if (searchElem.compareTo(c.getData()) < 0)
                 c = c.getleftChild();
-            else if (c.getData().compareTo(searchElem) < 0)
-                c = c.getrightChild();
-            else return null;
+            else c = c.getrightChild();
+            if (c == null) return null;
         }
         if (c.getWhere() <= 0) return null;
         else return c;
@@ -122,46 +121,22 @@ public class Tree
         }
         return successor;
     }
-
-    public void traverse(int traverseType) {
-        switch(traverseType) {
-          case 1: System.out.print("\nPreorder traversal: ");
-            preOrder(root);
-            break;
-          case 2: System.out.print("\nInorder traversal: ");
-            inOrder(root);
-            break;
-          case 3: System.out.print("\nPostorder traversal: ");
-            postOrder(root);
-            break;
-        }
-        System.out.println();
-      }
     
-    private void preOrder(Node localRoot) {
+    public void inOrder(Node localRoot, DataBaseRecord [] d) {
         if(localRoot != null) {
-          System.out.print(localRoot.getWhere() + " ");
-          preOrder(localRoot.getleftChild());
-          preOrder(localRoot.getrightChild());
-        }
-    }
-    
-    private void inOrder(Node localRoot) {
-        if(localRoot != null) {
-          inOrder(localRoot.getleftChild());
-          System.out.print(localRoot.getWhere() + " ");
-          inOrder(localRoot.getrightChild());
-        }
-    }
-    
-    private void postOrder(Node localRoot) {
-        if(localRoot != null) {
-          postOrder(localRoot.getleftChild());
-          postOrder(localRoot.getrightChild());
-          System.out.print(localRoot.getWhere() + " ");
+          inOrder(localRoot.getleftChild(),d);
+          System.out.println(d[localRoot.getWhere()] + " ");
+          inOrder(localRoot.getrightChild(),d);
         }
     }
 
+    public void inOrderBackwards(Node localRoot, DataBaseRecord [] d) {
+        if(localRoot != null) {
+          inOrder(localRoot.getrightChild(),d);
+          System.out.println(d[localRoot.getWhere()] + " ");
+          inOrder(localRoot.getleftChild(),d);
+        }
+    }
     
 }
 

@@ -13,7 +13,7 @@ public class DataBase {
 
     public DataBase() {                 // Main database constructor
         try {                           // Try-catch to get around FileNotFoundException
-            File studentData = new File("C:\\Users\\pc\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
+            File studentData = new File("C:\\Users\\jroga\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
             Scanner fin = new Scanner(studentData);
             next = 0;
             students = new DataBaseRecord[100];
@@ -93,10 +93,10 @@ public class DataBase {
     }
 
     public void print(Tree a) {       // Prints data from the beginning of the list
-        a.traverse(2);
+        a.inOrder(a.getRoot(), students);
     }
     public void printBackwards(Tree a) {  // Prints data in from the end of the list
-        a.traverse(3);
+        a.inOrderBackwards(a.getRoot(), students);
     }
 
     public boolean findDuplicates(String id){   // Looks for a duplicate ID and skips the new record if true
@@ -114,9 +114,9 @@ public class DataBase {
     }
     
     public void findDuplicatesAndPopulate() { // combines populate and findDuplicates for cleaner code
-        if (findDuplicates(newID))
+        /*if (findDuplicates(newID))
             System.out.println("Warning: "+ newID + " already in use. Record will be discarded.");
-        else populate();
+        else*/ populate();
     }
 }
 
