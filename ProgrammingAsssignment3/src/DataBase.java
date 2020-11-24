@@ -13,7 +13,7 @@ public class DataBase {
 
     public DataBase() {                 // Main database constructor
         try {                           // Try-catch to get around FileNotFoundException
-            File studentData = new File("C:\\Users\\jroga\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
+            File studentData = new File("C:\\Users\\pc\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
             Scanner fin = new Scanner(studentData);
             next = 0;
             students = new DataBaseRecord[100];
@@ -42,22 +42,22 @@ public class DataBase {
     public void findIt() {      // Looks for and returns a record based on user input of an ID
         System.out.println("Enter a student ID to look up: ");
         String searchid = in.next();
-        Node find = SortById.search(searchid);
-        if (find != null)
-            System.out.println(students[find.getWhere()]);
+        int find = SortById.search(searchid);
+        if (find != -1)
+            System.out.println(students[find]);
         else System.out.println("ID not found");
     }
 
     public void deleteIt() {    // Deletes a record from the database
         System.out.println("Enter the ID number of the student you wish to delete: ");
         String delid = in.next();
-        Node del = SortById.search(delid);
-        if (del == null)
+        int del = SortById.search(delid);
+        if (del == -1)
             System.out.println("ID not found");
         else {
-            SortById.delete(del.getWhere());
-            SortByfName.delete(del.getWhere());
-            SortBylName.delete(del.getWhere());
+            SortById.delete(del);
+            SortByfName.delete(del);
+            SortBylName.delete(del);
             System.out.println("Deleted");
         }
     }
@@ -100,7 +100,7 @@ public class DataBase {
     }
 
     public boolean findDuplicates(String id){   // Looks for a duplicate ID and skips the new record if true
-        if (SortById.search(id) != null)
+        if (SortById.search(id) != -1)
             return true;
         else return false;
     }
@@ -114,9 +114,9 @@ public class DataBase {
     }
     
     public void findDuplicatesAndPopulate() { // combines populate and findDuplicates for cleaner code
-        /*if (findDuplicates(newID))
+        if (findDuplicates(newID))
             System.out.println("Warning: "+ newID + " already in use. Record will be discarded.");
-        else*/ populate();
+        else populate();
     }
 }
 

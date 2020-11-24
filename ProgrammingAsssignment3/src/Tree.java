@@ -38,16 +38,17 @@ public class Tree
         return root;
     }
 
-    public Node search(String searchElem) { // searches for a node in the tree
+    public int search(String searchElem) { // searches for a node in the tree
         Node c = root;
-        while (c.getData() != searchElem) {
+        while (c != null) {
+            if (c.getData().equals(searchElem)) break;
             if (searchElem.compareTo(c.getData()) < 0)
                 c = c.getleftChild();
             else c = c.getrightChild();
-            if (c == null) return null;
         }
-        if (c.getWhere() <= 0) return null;
-        else return c;
+        if (c == null) return -1;
+        if (c.getData().equals(searchElem)) return c.getWhere();
+        else return -1;
     }
 
     public boolean delete(int del) // deletes a node from the tree
