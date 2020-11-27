@@ -67,9 +67,12 @@ public class Tree
                 isleftChild = false;
                 current = current.getrightChild();
             }    
-           if (current == null) return false;
-       }
-
+            if (current == null){ 
+                System.out.println("Not found");
+                return false;
+            }
+        }
+        
         if (current.getleftChild() == null && current.getrightChild() == null) {
             if (current == root)
                 root = null;
@@ -89,7 +92,7 @@ public class Tree
 
         else if(current.getleftChild()==null)
             if (current == root)
-            root = current.getrightChild();
+                root = current.getrightChild();
             else if(isleftChild)
                 parent.setleftChild(current.getrightChild());
             else
@@ -133,9 +136,9 @@ public class Tree
 
     public void inOrderBackwards(Node localRoot, DataBaseRecord [] d) {
         if(localRoot != null) {
-          inOrder(localRoot.getrightChild(),d);
+          inOrderBackwards(localRoot.getrightChild(),d);
           System.out.println(d[localRoot.getWhere()] + " ");
-          inOrder(localRoot.getleftChild(),d);
+          inOrderBackwards(localRoot.getleftChild(),d);
         }
     }
     
