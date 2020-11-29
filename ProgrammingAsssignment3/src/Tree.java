@@ -38,7 +38,7 @@ public class Tree
         return root;
     }
 
-    public int search(String searchElem) { // searches for a node in the tree
+    public Node search(String searchElem) { // searches for a node in the tree
         Node c = root;
         while (c != null) {
             if (c.getData().equals(searchElem)) break;
@@ -46,9 +46,9 @@ public class Tree
                 c = c.getleftChild();
             else c = c.getrightChild();
         }
-        if (c == null) return -1;
-        if (c.getData().equals(searchElem)) return c.getWhere();
-        else return -1;
+        if (c == null) return null;
+        if (c.getData().equals(searchElem)) return c;
+        else return null;
     }
 
     public boolean delete(int del) // deletes a node from the tree
@@ -57,15 +57,15 @@ public class Tree
         Node parent = root;
         boolean isleftChild = true;
 
-        while (current.getWhere() !=del) {
+        while (current.getWhere() != del) {
             parent = current;
-            if (del < current.getWhere()) {
-                isleftChild = true;
-                current = current.getleftChild();
-            }
-            else {
+            if (current.getWhere() < del) {
                 isleftChild = false;
                 current = current.getrightChild();
+            }
+            else {
+                isleftChild = true;
+                current = current.getleftChild();
             }    
             if (current == null){ 
                 System.out.println("Not found");
@@ -83,7 +83,7 @@ public class Tree
 
         else if (current.getrightChild() == null) {
             if (current == root)
-                root = current.getleftChild();
+                root = root.getleftChild();
             else if (isleftChild)
                 parent.setleftChild(current.getleftChild());
             else
@@ -92,11 +92,12 @@ public class Tree
 
         else if(current.getleftChild()==null)
             if (current == root)
-                root = current.getrightChild();
+                root = root.getrightChild();
             else if(isleftChild)
                 parent.setleftChild(current.getrightChild());
             else
                 parent.setrightChild(current.getrightChild());
+        
         else {
             Node successor = getSuccessor(current);
             if(current == root)
@@ -141,7 +142,6 @@ public class Tree
           inOrderBackwards(localRoot.getleftChild(),d);
         }
     }
-    
 }
 
 
