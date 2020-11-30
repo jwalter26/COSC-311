@@ -35,7 +35,7 @@ public class Node {
     return data;
   }
 
-  public void displayNode() {
+  public void displayNode() { // returns all node data in 1 line
     System.out.print('{' + where + ", " + data + '}');
   }
 

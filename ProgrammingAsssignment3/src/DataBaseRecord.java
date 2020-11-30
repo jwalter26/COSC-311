@@ -4,7 +4,7 @@ public class DataBaseRecord
     private String lName;
     private String id;
 
-    public DataBaseRecord (String lName , String fName , String id) {
+    public DataBaseRecord (String lName , String fName , String id) { // main constructor for a new database record
         this.fName = fName;
         this.lName = lName;
         this.id = id;
@@ -14,15 +14,15 @@ public class DataBaseRecord
         return lName + " " + fName + " " + " " + id;
     }
 
-    public String getfName() {
+    public String getfName() { // returns the student's first name
         return fName;
     }
 
-    public String getlName() {
+    public String getlName() { // returns the student's last name
         return lName;
     }
 
-    public String getid() {
+    public String getid() { // returns the student's ID number
         return id;
     }
 }

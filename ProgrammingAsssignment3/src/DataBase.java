@@ -13,15 +13,15 @@ public class DataBase {
 
     public DataBase() {                 // Main database constructor
         try {                           // Try-catch to get around FileNotFoundException
-            File studentData = new File("C:\\Users\\jroga\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
+            File studentData = new File("C:\\Users\\pc\\Documents\\GitHub\\Jesses-Projects\\ProgrammingAsssignment3\\src\\dataset.txt");
             Scanner fin = new Scanner(studentData);
             next = 0;
             students = new DataBaseRecord[100];
-            while (fin.hasNext()){      // Loop to read in the data from dataset.txt and populate the arrays
+            while (fin.hasNext()){      // Loop to read in the data from dataset.txt
                 newlName = fin.next();
                 newfName = fin.next();
                 newID = fin.next();
-                findDuplicatesAndPopulate();
+                findDuplicatesAndPopulate(); // checks for a duplicate record and adds records to the database and new nodes to the trees
             }
             fin.close();
         }
@@ -42,22 +42,22 @@ public class DataBase {
     public void findIt() {      // Looks for and returns a record based on user input of an ID
         System.out.println("Enter a student ID to look up: ");
         String searchid = in.next();
-        Node find = SortById.search(searchid);
-        if (find != null)
-            System.out.println(students[find.getWhere()]);
-        else System.out.println("ID not found");
+        int find = SortById.search(searchid);    // looks through ID tree to find matching value
+        if (find != -1)
+            System.out.println(students[find]);  // database record printed from search return value
+        else System.out.println("ID not found"); // node not found
     }
 
     public void deleteIt() {    // Deletes a record from the database
         System.out.println("Enter the ID number of the student you wish to delete: ");
         String delid = in.next();
-        Node del = SortById.search(delid);
-        if (del == null)
+        int del = SortById.search(delid);
+        if (del == -1)          // node to delete not found
             System.out.println("ID not found");
-        else {
-            SortById.delete(del.getWhere());
-            SortByfName.delete(del.getWhere());
-            SortBylName.delete(del.getWhere());
+        else {                  // node found and the data is deleted from its appropriate tree
+            SortById.delete(delid);
+            SortByfName.delete(students[del].getfName());
+            SortBylName.delete(students[del].getlName());
             System.out.println("Deleted");
         }
     }
@@ -92,31 +92,31 @@ public class DataBase {
         System.out.println();
     }
 
-    public void print(Tree a) {       // Prints data from the beginning of the list
+    public void print(Tree a) {       // returns data in ascending order from the tree
         a.inOrder(a.getRoot(), students);
     }
-    public void printBackwards(Tree a) {  // Prints data in from the end of the list
+    public void printBackwards(Tree a) {  // returns data in descending order from the tree
         a.inOrderBackwards(a.getRoot(), students);
     }
 
-    public boolean findDuplicates(String id){   // Looks for a duplicate ID and skips the new record if true
-        if (SortById.search(id) != null)
+    public boolean findDuplicates(String id){   // looks for a duplicate ID and skips the new record if true
+        if (SortById.search(id) != -1)
             return true;
         else return false;
     }
 
-    public void populate() {  // populates the database array and the sorted linked lists for each field
-        students[next] = new DataBaseRecord(newlName,newfName,newID);
-        SortById.insert(new Node(newID, next));
+    public void populate() {  // populates the database array and the binary search trees for each field
+        students[next] = new DataBaseRecord(newlName,newfName,newID); // adds new record to the database array
+        SortById.insert(new Node(newID, next));        // each field of data is added to its respective tree as a new node
         SortByfName.insert(new Node(newfName, next));
         SortBylName.insert(new Node(newlName, next));
         next++;
     }
     
     public void findDuplicatesAndPopulate() { // combines populate and findDuplicates for cleaner code
-        if (findDuplicates(newID))
+        if (findDuplicates(newID)) // duplicate found
             System.out.println("Warning: "+ newID + " already in use. Record will be discarded.");
-        else populate();
+        else populate(); // duplicate not found
     }
 }
 
