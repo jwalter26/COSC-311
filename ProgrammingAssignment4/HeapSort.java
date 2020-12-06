@@ -1,3 +1,5 @@
+import java.io.PrintWriter;
+
 public class HeapSort {
     private Node[] arr;
     private int size;
@@ -36,17 +38,21 @@ public class HeapSort {
         arr[index] = top;
     }
 
-    public void displayArray() {
+    public void displayArray(PrintWriter p) {
         for(int j=0; j<size; j++)
-        System.out.print(arr[j].getData() + " ");
-        System.out.println("");
+            p.println(arr[j].getData() + " ");
     }
 
     public void insertAt(int index, Node newNode) { 
-        arr[index] = newNode; 
+        arr[index] = newNode;
+        incrementSize(); 
     }
 
     public void incrementSize() { 
         currsize++; 
+    }
+
+    public int getCurrentSize(){
+        return currsize;
     }
 }
