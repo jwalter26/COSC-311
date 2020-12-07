@@ -15,63 +15,33 @@ public class QuickSort {
     }
 
     public void display(PrintWriter p){
-        for(int j=0; j < sz; j++) // for each element,
-            p.println(arr[j] + " "); // display it
-    }
-
-    /*public void quickSort(){
-        recQuickSort(0, sz - 1);
-    }
-
-    public void recQuickSort(int left, int right){
-        if (right-left <= 0) return;
-        else {
-            long pivot = arr[right];
-            int partition = partitionIt(left,right,pivot);
-            recQuickSort(left,partition - 1);
-            recQuickSort(partition + 1, right);
+        for(int j=0; j < sz; j++) {
+            p.println(arr[j]); 
+            
         }
+        p.close();
     }
-
-    public int partitionIt(int left, int right, long pivot) {
-        int leftPtr = left - 1;
-        int rightPtr = right;
-        while (true) {
-            while (arr[++leftPtr] < pivot) ;
-            while (rightPtr > 0 && arr[--rightPtr] > pivot) ;
-            if (leftPtr >= rightPtr) break;
-            else swap(leftPtr, rightPtr);
-        }
-        swap(leftPtr, rightPtr);
-        return leftPtr;
-    }
-
-    public void swap(int dex1, int dex2) {
-        long temp = arr[dex1];
-        arr[dex1] = arr[dex2];
-        arr[dex2] = temp;
-    }*/
 
     private int partition(int arr[], int low, int high) 
     { 
         int pivot = arr[high]; 
   
-        // index of smaller element 
+       
         int i = (low - 1); 
         for (int j = low; j <= high - 1; j++) { 
-            // If current element is smaller than or 
-            // equal to pivot 
+            
+            
             if (arr[j] <= pivot) { 
                 i++; 
   
-                // swap arr[i] and arr[j] 
+                
                 int temp = arr[i]; 
                 arr[i] = arr[j]; 
                 arr[j] = temp; 
             } 
         } 
   
-        // swap arr[i+1] and arr[high] (or pivot) 
+        
         int temp = arr[i + 1]; 
         arr[i + 1] = arr[high]; 
         arr[high] = temp; 

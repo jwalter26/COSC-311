@@ -46,17 +46,17 @@ public class Program4Driver {
 
         while (ainHeap.hasNextInt()) {
             int newElem = ainHeap.nextInt();
-            heapA.insertAt(heapA.getCurrentSize(), new Node(newElem));
+            heapA.insertAt(newElem);
         }
         
         while (dinHeap.hasNextInt()) {
             int newElem = dinHeap.nextInt();
-            heapD.insertAt(heapD.getCurrentSize(), new Node(newElem));
+            heapD.insertAt(newElem);
         }
 
         while (rinHeap.hasNextInt()) {
             int newElem = rinHeap.nextInt();
-            heapR.insertAt(heapR.getCurrentSize(), new Node(newElem));
+            heapR.insertAt(newElem);
         }
 
         while (ainMerge.hasNextInt()) {
@@ -64,42 +64,54 @@ public class Program4Driver {
             mergeA.insert(newElem);
             
         }
-        System.out.println(mergeA.getSize());
 
         while (dinMerge.hasNextInt()) {
             int newElem = dinMerge.nextInt();
             mergeD.insert(newElem);
             
         }
-        System.out.println(mergeD.getSize());
 
         while (rinMerge.hasNextInt()) {
             int newElem = rinMerge.nextInt();
             mergeR.insert(newElem);
             
         }
-        System.out.println(mergeR.getSize());
 
         while (ainQuick.hasNextInt()) {
             int newElem = ainQuick.nextInt();
             quickA.insert(newElem);
            
         }
-        System.out.println(quickA.getSize());
 
         while (dinQuick.hasNextInt()) {
             int newElem = dinQuick.nextInt();
             quickD.insert(newElem);
             
         }
-        System.out.println(quickD.getSize());
 
         while (rinQuick.hasNextInt()) {
             int newElem = rinQuick.nextInt();
             quickR.insert(newElem);
             
         }
-        System.out.println(quickR.getSize());
+
+        long startHA = System.nanoTime();
+        heapA.sort();
+        long endHA = System.nanoTime();
+        heapA.display(outHA);
+        System.out.println("Heap Ascending: " + (endHA - startHA) + " nanoseconds");
+
+        long startHD = System.nanoTime();
+        heapD.sort();
+        long endHD = System.nanoTime();
+        heapD.display(outHD);
+        System.out.println("Heap Descending: " + (endHD - startHD) + " nanoseconds");
+
+        long startHR = System.nanoTime();
+        heapR.sort();
+        long endHR = System.nanoTime();
+        heapR.display(outHR);
+        System.out.println("Heap Random: " + (endHR - startHR) + " nanoseconds");
 
         long startMA = System.nanoTime();
         mergeA.mergeSort();

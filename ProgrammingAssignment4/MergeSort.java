@@ -15,8 +15,11 @@ public class MergeSort {
     }
 
     public void display(PrintWriter p) {
-        for(int j=0; j<sz; j++)
-            p.println(arr[j] + " ");
+        for(int j=0; j<sz; j++) {
+            p.println(arr[j]);
+            //System.out.println(arr[j]);
+        }
+        p.close();
     }
 
     public void mergeSort() { 
