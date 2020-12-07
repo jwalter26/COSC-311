@@ -4,23 +4,23 @@ public class Program4Driver {
     public static void main(String [] args) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
 
-        //System.out.println("Enter an input file for random data: ");
-        //Scanner rin = new Scanner(new File(in.nextLine()));
-        Scanner rinMerge = new Scanner(new File("dataRandom.txt"));
-        Scanner rinHeap = new Scanner(new File("dataRandom.txt"));
-        Scanner rinQuick = new Scanner(new File("dataRandom.txt"));
+        System.out.println("Enter an input file for random data: ");
+        String rin = in.nextLine();
+        Scanner rinMerge = new Scanner(new File(rin));
+        Scanner rinHeap = new Scanner(new File(rin));
+        Scanner rinQuick = new Scanner(new File(rin));
 
-        //System.out.println("Enter an input file for ascending data data: ");
-        //Scanner ain = new Scanner(new File(in.nextLine()));
-        Scanner ainMerge = new Scanner(new File("dataAscend.txt"));
-        Scanner ainHeap = new Scanner(new File("dataAscend.txt"));
-        Scanner ainQuick = new Scanner(new File("dataAscend.txt"));
+        System.out.println("Enter an input file for ascending data data: ");
+        String ain = in.nextLine();
+        Scanner ainMerge = new Scanner(new File(ain));
+        Scanner ainHeap = new Scanner(new File(ain));
+        Scanner ainQuick = new Scanner(new File(ain));
 
-        //System.out.println("Enter an input file for descending data: ");
-        //Scanner din = new Scanner(new File(in.nextLine()));
-        Scanner dinMerge = new Scanner(new File("dataDescend.txt"));
-        Scanner dinHeap = new Scanner(new File("dataDescend.txt"));
-        Scanner dinQuick = new Scanner(new File("dataDescend.txt"));
+        System.out.println("Enter an input file for descending data: ");
+        String din = in.nextLine();
+        Scanner dinMerge = new Scanner(new File(din));
+        Scanner dinHeap = new Scanner(new File(din));
+        Scanner dinQuick = new Scanner(new File(din));
 
         System.out.println("Enter a filename prefix for the output files: ");
         String outPrefix = in.nextLine();
@@ -43,6 +43,8 @@ public class Program4Driver {
         QuickSort quickA = new QuickSort(11000);
         QuickSort quickD= new QuickSort(11000);
         QuickSort quickR = new QuickSort(11000);
+
+        in.close();
 
         while (ainHeap.hasNextInt()) {
             int newElem = ainHeap.nextInt();
